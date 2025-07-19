@@ -1,0 +1,6 @@
+{
+  "name": "Vehicle Route Simulator",
+  "description": "A web application to visualize and simulate a vehicle's movement along a GPS route. It displays real-time stats on an interactive map and features a responsive design. Users can load routes by pasting GeoJSON data.",
+  "requestFramePermissions": [],
+  "prompt": "Remove all external API integrations from the project. The app should only support loading a route by pasting GeoJSON data."
+}
