@@ -10,15 +10,20 @@ import { LatLngExpression } from "leaflet";
 import { RouteData } from "./types";
 
 function App() {
-  const [route, setRoute] = useState<RouteData>(initialRouteData);
+  const [route, setRoute] = useState<RouteData>(initialRouteData as RouteData);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [locationName, setLocationName] = useState("Default Route");
 
-  const coordinates = useMemo<LatLngExpression[]>(() => 
-    route.features[0].geometry.coordinates.map(coord => [coord[1], coord[0]]),
+  const coordinates = useMemo<LatLngExpression[]>(
+    () =>
+      route.features[0].geometry.coordinates.map((coord) => [
+        coord[1],
+        coord[0],
+      ]),
     [route]
   );
-  
+
   const {
     vehiclePosition,
     currentSpeed,
@@ -55,7 +60,10 @@ function App() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
-        <Polyline pathOptions={{ color: 'green', weight: 6, opacity: 0.7 }} positions={coordinates} />
+        <Polyline
+          pathOptions={{ color: "green", weight: 6, opacity: 0.7 }}
+          positions={coordinates}
+        />
         {vehiclePosition && <VehicleMarker position={vehiclePosition} />}
         {vehiclePosition && <MapAutoCenter position={vehiclePosition} />}
       </MapContainer>
@@ -66,7 +74,9 @@ function App() {
         totalDistance={totalDistance}
         locationName={locationName}
         timers={timers}
-        onPlayPause={simulationStatus === 'Running' ? pauseSimulation : startSimulation}
+        onPlayPause={
+          simulationStatus === "Running" ? pauseSimulation : startSimulation
+        }
         onReset={resetSimulation}
         onAddLocation={() => setIsModalOpen(true)}
       />
